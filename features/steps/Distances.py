@@ -1,6 +1,7 @@
 from behave import *
 from hamcrest  import *
 from helpers import distance
+import numpy as np
 
 use_step_matcher("parse")
 counter = 0
@@ -61,3 +62,43 @@ def step_impl(context):
     """
     assert_that(context.manual_result,equal_to(3.2683329083800503))
     # assert(context.manual_result == 3.2683329083800503)
+
+'''
+    Calculating using numpy.linalg.norm from numpy Python library
+'''
+
+@given("Having user#1 vector [1.1,2.1,3.22] and user#2 vector  [3.2,4.34,2.1]")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    context.user1_vector = [1.1, 2.1, 3.22]
+    context.user2_vector = [3.2, 4.34, 2.1]
+
+
+@given("Having matrix with first row : user#1 vector [1.1,2.1,3.22] and second row user#2 vector [3.2,4.34,2.1]")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+
+    context.user1_np_array = np.array([1.1, 2.1, 3.22])
+    context.user2_np_array = np.array([3.2, 4.34, 2.1])
+
+
+
+@when("i use calculateNumpyNorm()")
+def step_impl(context):
+
+    """
+    :type context: behave.runner.Context
+    """
+    context.numpy_norm_result = distance.calculateNumpyNorm(context.user1_np_array,context.user2_np_array)
+
+@then("I should receive [3.2683329083800503]")
+def step_impl(context):
+    """
+       :type context: behave.runner.Context
+    """
+
+    assert_that(context.numpy_norm_result,equal_to(3.2683329083800503))

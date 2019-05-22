@@ -22,3 +22,7 @@ Feature: EUCLIDEAN : calculating Euclidean distances for various data types and 
 
 
 
+  Scenario: helpers.calculateNumpyNorm() -> calculating distance using np.linalg.norm
+    Given Having matrix with first row : user#1 vector [1.1,2.1,3.22] and second row user#2 vector [3.2,4.34,2.1]
+    When i use calculateNumpyNorm()
+    Then I should receive [3.2683329083800503]
