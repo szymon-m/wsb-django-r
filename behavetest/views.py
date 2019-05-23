@@ -6,3 +6,7 @@ from django.http import HttpResponse
 @login_required
 def show_user(request):
     return HttpResponse("OK")
+
+
+def show_records(request):
+    return None
