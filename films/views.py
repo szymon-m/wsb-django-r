@@ -8,6 +8,7 @@ def show_films(request):
 
     x = 0
     response = '<html><head></head><body>'
+    # https://stackoverflow.com/questions/3284827/python-3-chokes-on-cp-1252-ansi-reading  added encoding to utf-8
     with open('films/csv_data/movies.csv', encoding="utf-8") as f:
         for row in f.readlines()[1:]:
             columns = row.split(',')
