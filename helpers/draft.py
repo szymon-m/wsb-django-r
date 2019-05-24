@@ -57,8 +57,21 @@ output = sorted(output, key=lambda output: output[2])
 print("- Najblizszych 3 (TOP 3) userow względem (user #1) z najmniejszym dystansem :")
 print(output[1:4])
 
+print("\n============")
+print("Funkcja wypełniająca pobierajaca dane z ratings.csv")
+print("1. Ratingi poszczególnych filmów (np film_1,film_2) są w stałej kolejności")
+print("   np. dla usera #1 tablica wygląda nastepująco user#1 = [5,4,3,2,1]")
+print("   więc film #1 ma 5, film #2 ma 4 itd.")
+print("2. Z pliku ratings.csv powstaną puste pola, które trzeba wypełnic zerami ")
 
+print("\n============")
+print("Funkcja licząca średnią dla filmu z uwzględnieniem wag ")
+print("(wagi ratingow uzytkownika w zalezności od dystansu od wybranego uzytkownika - odwrotnie proporcjonalna, czyli 1 / dystans)")
+print("1. Powinna zliczać tylko pełne ratingi - czyli bez zer")
+print("2. Dla zliczenia średniej filmu (w kolumnie - wiersze to userzy) - iteracja dla każdej kolumny z wyłączeniem zer")
 
+print("\n============")
+print("Funkcja pobierajaca ID filmow, posortowane od najwiekszego sredniego ratingu, wybiera np. z tego TOP 5")
 # inne
 def silnia(x):
 
