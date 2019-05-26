@@ -1,4 +1,14 @@
-from films.models import Users, Movies, Ratings
+from films.models import Users, Movies, Ratings, Links
+import sqlite3
+import os
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
+
+def execute_sql(s):
+    con = sqlite3.connect(dir_path + '../../db.sqlite3')
+    with con:
+        cur = con.cursor()
+        cur.execute(s)
 
 
 def populate_users(ratings_file):
@@ -23,21 +33,13 @@ def populate_users(ratings_file):
 
     usr = []
 
+
 def populate_movies(movies_file):
-
-    #movies = []
-
-    #Movies.objects.create(title="hello")
 
     with open(movies_file, encoding="utf-8") as f:
         for row in f.readlines()[1:]:
             columns = row.split(',')
             Movies.objects.create(movieid=int(columns[0]), title=columns[1])
-
-
-
-    # for movie in movies:
-    #     Movies.objects.create(title=movie)
 
 
 def populate_ratings(ratings_file):
@@ -48,3 +50,33 @@ def populate_ratings(ratings_file):
             Ratings.objects.create(movie=Movies.objects.get(movieid=int(columns[1])),
                                    user=Users.objects.get(id=int(columns[0])),
                                    rating=columns[2])
+
+        #  ================================
+        #  Django testing database result  1m45s
+        #  Raw SQL - > over 5m
+
+        # for movie_id in movie_list:
+        #     try:
+        #
+        #         sql = (
+        #             '''INSERT INTO films_ratings (user_id, movie_id, rating) VALUES (\'{}\',\'{}\',\'{}\')'''.format(
+        #                 int(columns[0]),
+        #                 int(columns[1]),
+        #                 float(columns[2]),
+        #             ))
+        #
+        #         execute_sql(sql)
+        #
+        #         print("Insert movie: " + str(columns[0]), str(Ratings.objects.count()))
+        #     except Exception as e:
+        #         print('Movie Insert Failure: ' + columns[0], e)
+        #         continue
+
+
+def populate_links(links_file):
+
+    with open(links_file, encoding="utf-8") as f:
+        for row in f.readlines()[1:]:
+            columns = row.split(',')
+            Links.objects.create(movie=Movies.objects.get(movieid=int(columns[0])),
+                                   imdbid=columns[1])

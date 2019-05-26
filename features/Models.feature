@@ -18,4 +18,9 @@ Feature: DB Models : creating db models for MovieLens 100k dataset
     When calling helpers.models.populate_ratings(rating_file)
     Then I should have my Ratings table populated
 
+  Scenario: Populating Links table
+    Given Having links.csv file with movieId and IMDBid
+    When calling helpers.models.populate_links(links_file)
+    Then I should have my Links table populated
+
 

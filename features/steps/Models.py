@@ -69,12 +69,12 @@ def step_impl(context):
     """
     :type context: behave.runner.Context
     """
-    helpers.models.populate_users(context.ratings_file)
-    helpers.models.populate_movies(context.movies_file)
+    #helpers.models.populate_users(context.ratings_file)
+    #helpers.models.populate_movies(context.movies_file)
 
     #Users.objects.get(id=1)
-    assert_that(Users.objects.count(), equal_to(int(610)))
-    assert_that(Movies.objects.count(), equal_to(int(9742)))
+    #assert_that(Users.objects.count(), equal_to(int(610)))
+    #assert_that(Movies.objects.count(), equal_to(int(9742)))
 
 
 
@@ -83,6 +83,8 @@ def step_impl(context):
     """
     :type context: behave.runner.Context
     """
+    helpers.models.populate_users(context.ratings_file)
+    helpers.models.populate_movies(context.movies_file)
     helpers.models.populate_ratings(context.ratings_file)
 
 
@@ -92,3 +94,29 @@ def step_impl(context):
     :type context: behave.runner.Context
     """
     assert_that(Ratings.objects.count(), equal_to((int(100836))))
+
+
+@given("Having links\.csv file with movieId and IMDBid")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    context.links_file = 'films/csv_data/links.csv'
+    context.movies_file = 'films/csv_data/movies.csv'
+
+
+@when("calling helpers\.models\.populate_links\(links_file\)")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    helpers.models.populate_movies(context.movies_file)
+    helpers.models.populate_links(context.links_file)
+
+
+@then("I should have my Links table populated")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    assert_that(Links.objects.count(), equal_to((int(9742))))
