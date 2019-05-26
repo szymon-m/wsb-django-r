@@ -67,7 +67,7 @@ print("2. Z pliku ratings.csv powstaną puste pola, które trzeba wypełnic zera
 print("\n============")
 print("Funkcja licząca średnią dla filmu z uwzględnieniem wag ")
 print("(wagi ratingow uzytkownika w zalezności od dystansu od wybranego uzytkownika - odwrotnie proporcjonalna, czyli 1 / dystans)")
-print("1. Powinna zliczać tylko pełne ratingi - czyli bez zer")
+print("1. Powinna zliczać tylko pełne ratingi_lista - czyli bez zer")
 print("2. Dla zliczenia średniej filmu (w kolumnie - wiersze to userzy) - iteracja dla każdej kolumny z wyłączeniem zer")
 
 print("\n============")
