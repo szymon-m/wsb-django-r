@@ -1,0 +1,36 @@
+{% extends "films/base.html" %}
+
+
+{% block extrajs %}
+{% load static %}
+    <script  src="{% static 'js/app.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+{% if helloworld %}
+    <br>
+    <h2>(Python) Django</h2><br>
+
+    Strona główna utworzona przy pomocy Django oraz javascript/JQuery.<br><br>    
+    {{ helloworld }}
+{% endif %}
+<br><br>
+<form action="{% url 'simple_films' %}" method="post">
+{% csrf_token %}
+
+    <select id="users" name="user_selector" onchange="dummy()">
+        <option value="100">100</option>
+        <option value="95">95</option>
+        <option value="96">96</option>
+        <option value="54">54</option>
+        <option value="32">32</option>
+    </select>
+    <br><br>
+    <div id="content">
+    # Tutaj bedzie rekomendacja #
+    </div>
+    <br><br>
+    {#    <input type="submit" value="Przejdź dalej">#}
+</form>
+<br>
+{% endblock main %}

@@ -1,10 +1,15 @@
 from django.http import HttpResponse
-from films.models import Movie
+from django.shortcuts import render
+
+import helpers
+from films.models import *
+from helpers import models
+
 
 # Create your views here.
 
 
-def show_films(request):
+def simple_films(request):
 
     x = 0
     response = '<html><head></head><body>'
@@ -26,3 +31,20 @@ def show_films(request):
             return HttpResponse(response)
         else:
             return HttpResponse("Fail")
+
+
+def show_main(request):
+
+    ratings_file = 'films/csv_data/ratings.csv'
+    movies_file = 'films/csv_data/movies.csv'
+    links_file = 'films/csv_data/links.csv'
+
+    helpers.models.populate_users(ratings_file)
+    helpers.models.populate_movies(movies_file)
+    helpers.models.populate_links(links_file)
+    helpers.models.populate_ratings(ratings_file)
+
+
+    context = {'helloworld': 'Wybierz ID użytkownika do rekomendacji: '}
+    return render(request, 'films/main.html', context)
+
