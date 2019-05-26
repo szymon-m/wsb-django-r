@@ -1,6 +1,8 @@
 from pandas import *
 import itertools
 
+from pandas._libs.parsers import basestring
+
 
 def create_main_ratings(ratings_file):
     ratings_df = pandas.read_csv(ratings_file)
@@ -11,7 +13,7 @@ def create_main_ratings(ratings_file):
 
 def create_movies_table(movies_file, links_file):
     movies = pandas.read_csv(movies_file)
-    links = pandas.read_csv(links_file)
+    links = pandas.read_csv(links_file, dtype={'imdbId': str})
 
     movies_file_ids = movies['movieId']
     links_file_ids = links['movieId']

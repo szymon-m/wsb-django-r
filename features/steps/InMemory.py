@@ -63,11 +63,11 @@ def step_impl(context):
         [2, 'Jumanji (1995)', 'Adventure|Children|Fantasy', '0113497'],
     ]), columns=['movieId', 'title', 'genres', 'imdbId'])
 
-    #//TODO: Watch zeros in imdb!! 114709 - pandas gets without zeros as nums while imdb is 0114709 !!
+    # TODO: Watch zeros in imdb!! 114709 - pandas gets without zeros as nums while imdb is 0114709 !!
+    # DONE : links = pandas.read_csv(links_file, dtype={'imdbId': str})
 
     expected = expected.iloc[0, 0:4].to_list()
-
     actual = context.movie_table.iloc[0, 0:4].to_list()
-    #actual = [str(record) for record in context_actual]
+    actual[0] = str(actual[0]) # actual returns movieId as integer - OK - to make test pass - changed to string
 
     assert_that(actual, equal_to(expected))
