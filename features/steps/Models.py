@@ -69,12 +69,12 @@ def step_impl(context):
     """
     :type context: behave.runner.Context
     """
-    #helpers.models.populate_users(context.ratings_file)
-    #helpers.models.populate_movies(context.movies_file)
+    helpers.models.populate_users(context.ratings_file)
+    helpers.models.populate_movies(context.movies_file)
 
-    #Users.objects.get(id=1)
-    #assert_that(Users.objects.count(), equal_to(int(610)))
-    #assert_that(Movies.objects.count(), equal_to(int(9742)))
+    Users.objects.get(id=1)
+    assert_that(Users.objects.count(), equal_to(int(610)))
+    assert_that(Movies.objects.count(), equal_to(int(9742)))
 
 
 
@@ -83,8 +83,8 @@ def step_impl(context):
     """
     :type context: behave.runner.Context
     """
-    helpers.models.populate_users(context.ratings_file)
-    helpers.models.populate_movies(context.movies_file)
+    # helpers.models.populate_users(context.ratings_file)
+    # helpers.models.populate_movies(context.movies_file)
     helpers.models.populate_ratings(context.ratings_file)
 
 

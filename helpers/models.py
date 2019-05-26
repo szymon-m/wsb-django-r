@@ -23,15 +23,13 @@ def populate_users(ratings_file):
 
     usr = sorted(usr, reverse=True)
 
-    print(Users.objects.count())
-
     for x in range(1,int(usr[0])+1):
         try:
-            Users.objects.get(id=x)
+            Users.objects.get_or_create(id=x)
         except Exception as e:
             print("User " + str(x) + " already exists")
             continue
-        Users.objects.create()
+
         print("Users: " + str(Users.objects.count()))
 
     Users.objects.get(id=1)  # there is no id=0 !! OK
