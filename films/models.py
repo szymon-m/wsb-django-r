@@ -28,6 +28,7 @@ class Users(models.Model):
 
 class Movies(models.Model):
 
+    movieid = models.IntegerField(primary_key=True, default=0)
     title = models.CharField(max_length=500)
 
     def __str__(self):
@@ -41,8 +42,8 @@ class Movies(models.Model):
 class Ratings(models.Model):
 
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movies, on_delete=models.CASCADE)
-    rating = models.IntegerField()
+    movie = models.ForeignKey(Movies, to_field='movieid', on_delete=models.CASCADE, default=0)
+    rating = models.FloatField()
 
     def __str__(self):
         return '(' + str(self.user) + ',' + str(self.movie) + ',' + str(self.rating) + ')'
@@ -53,7 +54,7 @@ class Ratings(models.Model):
 
 class Links(models.Model):
 
-    movie = models.ForeignKey(Movies, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movies, to_field='movieid', on_delete=models.CASCADE, default=0)
     imdbid = models.CharField(max_length=20)
 
     def __str__(self):
